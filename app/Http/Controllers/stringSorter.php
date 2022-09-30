@@ -17,18 +17,8 @@ class stringSorter extends Controller
         $numbers = '';
         $sortedString = '';
         $sortedArray = [];
-        // Get all capital letters
-        // if(preg_match_all($capitalPatterns, $string, $matches)){
-        //     $capitalLetters = implode('',$matches[0]);
-        // }
-        // if(preg_match_all($smallPatterns, $string, $matches)){
-        //     $smallLetters = implode('',$matches[0]);
-        // }
-        // if(preg_match_all($numberPatterns, $string, $matches)){
-        //     $numbers = implode('',$matches[0]);
-        // }
-        // return $sortedString = $smallLetters.$capitalLetters.$numbers;
 
+        // Sort string into 3 sorted arrays (capital, small, numbers)
         if(preg_match_all($capitalPatterns, $string, $matches)){
             $capitalLetters = $matches[0];
             sort($capitalLetters);
@@ -41,22 +31,12 @@ class stringSorter extends Controller
             $numbers = $matches[0];
             sort($numbers);
         }
-        // eA2a1E  aAeE12
-        // for ($i = 0; $i < count($smallLetters); $i++) {
-        //     if (ord($smallLetters[$i]) - ord($capitalLetters[$i]) == 32) {
-        //         array_push($sortedArray, $smallLetters[$i]);
-        //         array_push($sortedArray, $capitalLetters[$i]);
-        //         unset($capitalLetters[$i]);
-        //     } else array_push($sortedArray, $smallLetters[$i]);
-        // }
-        // for ($i = 0; $i < count($capitalLetters);$i++){
-        //     array_push($sortedArray, $capitalLetters[$i]);
-        // }
-        // return($sortedArray);
-        // 
+        // Loop over the samll letters and then the capital letters and do a comparison
         for($i = 0; $i <count($smallLetters); $i++){
             for($j = 0; $j< count($capitalLetters); $j++){
+                // First if condition to check if elements already exist in the sorted array
                 if(!(in_array($smallLetters[$i],$sortedArray)) && !(in_array($capitalLetters[$j],$sortedArray))){
+                    // Second if condition will insert the the elements depending on their ascii code
                     if(ord($smallLetters[$i]) - ord($capitalLetters[$j]) <= 32){
                         array_push($sortedArray, $smallLetters[$i]);
                         array_push($sortedArray, $capitalLetters[$j]);
@@ -65,19 +45,13 @@ class stringSorter extends Controller
                         array_push($sortedArray, $capitalLetters[$j]);
                         array_push($sortedArray, $smallLetters[$i]);
                     }
-                    // if(ord($smallLetters[$i]) - ord($capitalLetters[$j]) < 32){
-                    //     array_push($sortedArray, $smallLetters[$i]);
-                    //     array_push($sortedArray, $capitalLetters[$j]);
-                    // }
+
                 }
                 
             }
-            // if(!(in_array($smallLetters[$i],$sortedArray))){
-            //     array_push($sortedArray, $smallLetters[$i]);
-            // }
+
         }
 
-        // for($i = 0; $i <count($capitalLetters); $i++) array_push($sortedArray, $capitalLetters[$i]);
         $merge = array_merge($sortedArray, $numbers);
         $sortedString = implode('',$merge);
         return $sortedString;
