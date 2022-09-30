@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\NumberPartition;
+use App\Http\Controllers\PrefixNotation;
 use App\Http\Controllers\stringSorter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -25,6 +26,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/sort/{string}', [stringSorter::class, 'sortString']);
 
 Route::get('/partition/{number}',[NumberPartition::class, 'partitionNum']);
+
+Route::get('/calculate/{string}',[PrefixNotation::class, 'calculate']);
+
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

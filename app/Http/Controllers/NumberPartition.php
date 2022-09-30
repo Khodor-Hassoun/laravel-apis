@@ -16,6 +16,9 @@ class NumberPartition extends Controller
             array_push($partitionArray, $value);
             $i *= 10;
         }
-        return array_reverse($partitionArray);
+        return response()->json([
+            "status" => "Success",
+            "message" => array_reverse($partitionArray)
+        ]);
     }
 }
