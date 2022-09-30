@@ -17,7 +17,9 @@ class NumToBinary extends Controller
             array_push($binaryNums, decbin($numbers[$i]));
         }
 
-        return $binaryNums;
-
+        $binaryString = str_replace($numbers, $binaryNums, $string);
+        // echo $numbers[0];
+        // echo $binaryNums[0];
+        return $binaryString;
     }
 }
