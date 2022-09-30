@@ -54,7 +54,10 @@ class stringSorter extends Controller
 
         $merge = array_merge($sortedArray, $numbers);
         $sortedString = implode('',$merge);
-        return $sortedString;
+        return response()->json([
+            "status" => "Success",
+            "message" => $sortedString
+        ]);
 
     }
 }
