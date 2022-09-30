@@ -42,32 +42,45 @@ class stringSorter extends Controller
             sort($numbers);
         }
         // eA2a1E  aAeE12
-        for ($i = 0; $i < count($smallLetters); $i++) {
-            if (ord($smallLetters[$i]) - ord($capitalLetters[$i]) == 32) {
-                array_push($sortedArray, $smallLetters[$i]);
-                array_push($sortedArray, $capitalLetters[$i]);
-                unset($capitalLetters[$i]);
-            } else array_push($sortedArray, $smallLetters[$i]);
-        }
-        for ($i = 0; $i < count($capitalLetters);$i++){
-            array_push($sortedArray, $capitalLetters[$i]);
-        }
+        // for ($i = 0; $i < count($smallLetters); $i++) {
+        //     if (ord($smallLetters[$i]) - ord($capitalLetters[$i]) == 32) {
+        //         array_push($sortedArray, $smallLetters[$i]);
+        //         array_push($sortedArray, $capitalLetters[$i]);
+        //         unset($capitalLetters[$i]);
+        //     } else array_push($sortedArray, $smallLetters[$i]);
+        // }
+        // for ($i = 0; $i < count($capitalLetters);$i++){
+        //     array_push($sortedArray, $capitalLetters[$i]);
+        // }
         // return($sortedArray);
+        // 
+        for($i = 0; $i <count($smallLetters); $i++){
+            for($j = 0; $j< count($capitalLetters); $j++){
+                if(!(in_array($smallLetters[$i],$sortedArray)) && !(in_array($capitalLetters[$j],$sortedArray))){
+                    if(ord($smallLetters[$i]) - ord($capitalLetters[$j]) <= 32){
+                        array_push($sortedArray, $smallLetters[$i]);
+                        array_push($sortedArray, $capitalLetters[$j]);
+                    }
+                    if(ord($smallLetters[$i]) - ord($capitalLetters[$j]) > 32){
+                        array_push($sortedArray, $capitalLetters[$j]);
+                        array_push($sortedArray, $smallLetters[$i]);
+                    }
+                    // if(ord($smallLetters[$i]) - ord($capitalLetters[$j]) < 32){
+                    //     array_push($sortedArray, $smallLetters[$i]);
+                    //     array_push($sortedArray, $capitalLetters[$j]);
+                    // }
+                }
+                
+            }
+            // if(!(in_array($smallLetters[$i],$sortedArray))){
+            //     array_push($sortedArray, $smallLetters[$i]);
+            // }
+        }
+
+        // for($i = 0; $i <count($capitalLetters); $i++) array_push($sortedArray, $capitalLetters[$i]);
         $merge = array_merge($sortedArray, $numbers);
         $sortedString = implode('',$merge);
         return $sortedString;
-
-
-
-
-
-
-
-
-
-
-
-
 
     }
 }
