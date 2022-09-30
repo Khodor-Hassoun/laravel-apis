@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\NumberPartition;
+use App\Http\Controllers\NumToBinary;
 use App\Http\Controllers\PrefixNotation;
 use App\Http\Controllers\stringSorter;
 use Illuminate\Http\Request;
@@ -26,6 +27,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/sort/{string}', [stringSorter::class, 'sortString']);
 
 Route::get('/partition/{number}',[NumberPartition::class, 'partitionNum']);
+
+Route::get('/binary/{string}',[NumToBinary::class, 'numToBinary']);
 
 Route::get('/calculate/{string}',[PrefixNotation::class, 'calculate']);
 
